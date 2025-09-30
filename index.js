@@ -59,10 +59,30 @@ app.post("/events", async(req, res) => {
         if(newEvent){
             res.status(201).json({ message: "Event added successfully.", event: newEvent })
         } else {
-            res.status(404).json({ error: "Book not found." })
+            res.status(404).json({ error: "Event not found." })
         }
     } catch(error) {
         res.status(500).json({ error: "Failed to add Event." })
+    }
+})
+
+async function updateEvent(eventId, dataToUpdate){
+    try {
+        const updatedEvent = await Event.findByIdAndUpdate(eventId, dataToUpdate, { new: true })
+        return updatedEvent
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+app.post("/events/:eventId", async(req, res) => {
+    try {
+        const updatedEvent = await updateEvent(req.params.hotelId, req.body)
+        if(updatedEvent){
+            res.status(200).json({ message: "Event updated successfully", updatedEvent: updatedEvent })
+        }
+    } catch {
+        res.status(500).json({ error: "Error in updating event." })
     }
 })
 
