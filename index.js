@@ -77,7 +77,7 @@ async function updateEvent(eventId, dataToUpdate){
 
 app.post("/events/:eventId", async(req, res) => {
     try {
-        const updatedEvent = await updateEvent(req.params.hotelId, req.body)
+        const updatedEvent = await updateEvent(req.params.eventId, req.body)
         if(updatedEvent){
             res.status(200).json({ message: "Event updated successfully", updatedEvent: updatedEvent })
         }
