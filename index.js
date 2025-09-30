@@ -31,7 +31,7 @@ async function showAllEvent(){
 
 async function showEventById(eventId){
     try{
-        const event = await Event.findOne(eventId)
+        const event = await Event.findById(eventId)
         return event
     } catch(error) {
         console.log(error)
@@ -40,7 +40,7 @@ async function showEventById(eventId){
 
 app.get("/events/:eventId", async (req, res) => {
     try{
-        const event = await showEventById(req.params.events)
+        const event = await showEventById(req.params.eventId)
         if(event){
             res.json(event)
         } else {
