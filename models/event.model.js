@@ -9,7 +9,7 @@ image: {
     type: String,
     required: true,
 },
-status: String,
+eventType: String,
 host: {
     type: String,
     required: true,
