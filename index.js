@@ -29,9 +29,31 @@ async function showAllEvent(){
     }
 }
 
+async function showEventById(eventId){
+    try{
+        const event = await Event.findOne(eventId)
+        return event
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+app.get("/events/:eventId", async (req, res) => {
+    try{
+        const event = await showEventById(req.params.events)
+        if(event){
+            res.json(event)
+        } else {
+            res.status(404).json({ error: "Event not found." })
+        }
+    } catch(error){
+        res.status(500).json({ error: "Error in fetching data." })
+    }
+})
+
 app.get("/events", async(req, res) => {
     try {
-        const event = await showAllEvent(req.params.hotels)
+        const event = await showAllEvent(req.params.events)
         if(event){
             res.json(event)
         } else {
