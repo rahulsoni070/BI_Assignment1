@@ -20,6 +20,28 @@ app.get("/", (req, res) => {
     res.send("Backend running on Vercel")
 });
 
+async function showAllEvent(){
+    try{
+        const allEvent = await Event.find()
+        return allEvent 
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+app.get("/events", async(req, res) => {
+    try {
+        const event = await showAllEvent(req.params.hotels)
+        if(event){
+            res.json(event)
+        } else {
+            res.status(404).json({ error: "Event not found." })
+        }
+    } catch(error) {
+        res.status(500).json({ error: "Error in fetching Events." })
+    }
+})
+
 
 async function addNewEvent(newEventData){
     try {
@@ -31,7 +53,7 @@ async function addNewEvent(newEventData){
     }
 }
 
-app.post("/event", async(req, res) => {
+app.post("/events", async(req, res) => {
     try {
         const newEvent = await addNewEvent(req.body)
         if(newEvent){
