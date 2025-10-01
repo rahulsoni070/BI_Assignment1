@@ -30,6 +30,10 @@ speakers: {
     type: [String],
     required: true,
 },
+speakers: [
+  { name: String, image: String },
+  { name: String, image: String }
+],
 details: {
     type: String,
     required: true,
