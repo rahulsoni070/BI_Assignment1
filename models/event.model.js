@@ -26,10 +26,6 @@ price: {
     type: String,
     required: true,
 },
-speakers: {
-    type: [String],
-    required: true,
-},
 speakers: [
   { name: String, image: String },
   { name: String, image: String }
