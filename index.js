@@ -40,7 +40,7 @@ async function showEventById(eventId){
 
 app.get("/events/:eventId", async (req, res) => {
     try{
-        const event = await showEventById(req.params)
+        const event = await showEventById(req.params.eventId)
         if(event){
             res.json(event)
         } else {
